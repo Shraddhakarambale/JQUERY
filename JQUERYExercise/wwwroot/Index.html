@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JQUERYExercise</title>
+    <link href="Content/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="Content/bootstrap/js/bootstrap.min.js"></script>
+   
+
+    <script src="Content/JS/jquery/jquery.js"></script>
+    <style>
+        .blue {
+            color: blue;
+            font-family:'Lucida Calligraphy';
+            font-size: xx-large;
+            font-weight: bold;
+        }
+        #div2 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+          /*  display: none;*/
+            margin: 15px 10px;
+        }
+        #div4 {
+            width: 200px;
+            height: 200px;
+            background-color:blue;
+            /*  display: none;*/
+            margin: 15px 10px;
+        }
+        body {
+            margin: 0;
+            /*padding: 0;
+            font-family: arial;*/*/
+            /*background-color: orange;*/
+            /*overflow: hidden;*/
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #262626;
+            width: 250px;
+            height: 100%;
+            padding-top:20px;
+            color:white;
+            transition: .3s;
+        }
+
+        .sidebar ul {
+            margin: 0;
+            padding: 0px;
+            color: #fff;
+            list-style: none;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            color: #fff;
+            /* display: block;*/
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+        }
+
+     .sidebar ul li:hover {
+        background-color: grey;
+    }
+            
+
+        .sidebarBtn {
+            position: absolute;
+            top: 0;
+            right: -50px;
+            width: 50px;
+            height: 50px;
+            box-sizing: border-box;
+            cursor: pointer;
+            background-color: #f5f5f5;
+            border: none;
+            outline: none;
+        }
+        .dropdown-menu {
+            display: none;
+            
+        }
+        .dropdown-item:hover .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: 60px;
+            left: 100%;
+            
+            background-color: black;
+        }
+
+
+
+      .active {
+            left: 0;
+        }
+
+        
+
+        .menuborder {
+            position:fixed;
+            top:0;
+            left:0;
+            width:5px;
+            height:100%;
+            background-color:brown;
+            z-index:998;
+        }
+        .bodyContent {
+            opacity:0.5;
+        }
+        #bodyContent {
+            padding:20px;
+        }
+
+       
+        
+    </style>
+
+</head>
+<body>
+
+    <div id="bodyContent">
+        <h1>---------Exercise 1 – Change Listener-------------------</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <lable for="text" class="form-label">Enter the text</lable>
+                <input class="form-control" id="myInput" type="text" placeholder="Type something...">
+
+            </div>
+            <p style="color:blue" id="messageEX1">This is a paragraph.</p>
+        </div>
+
+        <script>
+            // Detect input field change
+            $(document).ready(function () {
+                $("#myInput").change(function () {
+                    $("#messageEX1").append(" " + $(this).val());
+                });
+            });
+
+        </script>
+        <h1>--------Exercise 2 – Show / Hide--------------</h1>
+        <div>
+
+            <img id="im1" src="clouds-cloudy-countryside-236047.jpg" width="20%" height="20%" />
+            <button id="show">Show</button>
+            <button id="toggle">Toggle</button>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $("#im1").click(function () {
+                    $("img").hide();
+                });
+                $("#show").click(function () {
+                    $("img").show();
+                });
+                $("#toggle").click(function () {
+                    $("img").toggle();
+                });
+
+            });
+        </script>
+
+        <h1>-------------Exercise 3 – Show / Hide------------------</h1>
+        <h2>Heading2</h2>
+        <p1>This is a paragraph</p1>
+        <div>This is another paragraph</div>
+        <button id="Add">Add Style to element</button>
+        <button id="Remove">Remove Style</button>
+        <button id="Toggle">Toggle</button>
+        <script>
+            $(document).ready(function () {
+                $("#Add").click(function () {
+                    $("h2,p1,div").addClass("blue");
+
+                });
+                $("#Remove").click(function () {
+                    $("h2,p1,div").removeClass("blue");
+
+                });
+                $("#Toggle").click(function () {
+                    $("h2,p1,div").toggleClass("blue");
+
+                });
+
+
+            });
+
+        </script>
+        <h1>---------------------Exercise 4 – Key Press Listener------------</h1>
+        <input id="input1" type="text">
+
+        <div id="div1">No key pressed</div>
+        <script>
+            $(document).ready(function () {
+                $("#input1").keypress(function (event) {
+                    event.preventDefault();
+                    let key = (event.keyCode ? event.keyCode : event.which);
+                    let character = String.fromCharCode(key)
+                    $("#div1").text("held down " + character);
+
+                });
+                $("#input1").keyup(function (event) {
+                    event.preventDefault();
+                    let key = (event.keyCode ? event.keyCode : event.which);
+
+                    let character = String.fromCharCode(key)
+                    $("#div1").text("last pressed " + character);
+
+                });
+            });
+
+        </script>
+        <h1>------------Exercise 5 – Focus Events------------------</h1>
+        <div id="div3" style="border: 1px solid black;padding:10px; margin:10px;">
+            Text <input type="text"><br>
+        </div>
+        <p>Click an input field to get focus. Click outside an input field to lose focus.</p>
+        <script>
+            $(document).ready(function () {
+                $("#div3").focusin(function () {
+                    $(this).css("background-color", "#FF3364");
+                });
+                $("#div3").focusout(function () {
+                    $(this).css("background-color", "#FFFFFF");
+                });
+            });
+        </script>
+
+
+        <h1>Exercise 6 – Fading</h1>
+        <div id="div2"></div><br>
+        <button id="fadIn">Fade In</button>
+        <button id="fadOut">Fade Out</button>
+
+        <script>
+            $(document).ready(function () {
+                $("#fadIn").click(function () {
+                    $("#div2").fadeIn(3000);
+
+
+                });
+                $("#fadOut").click(function () {
+                    $("#div2").fadeOut(3000);
+
+                });
+
+            });
+        </script>
+        <h1>Exercise 7 – Animation - Fading</h1>
+        <div id="div4"></div>
+
+        <script>
+            $(document).ready(function () {
+
+                $("#div4").hover(function () {
+                    $(this).fadeOut(1000);
+                    $(this).fadeIn(1000);
+                });
+
+            });
+        </script>
+        <h1>Exercise 8 – Animation - Movement</h1>
+    </div>
+    <div class="sidebar">
+
+        <h2>Menu</h2>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li class="dropdown-item">
+                Services
+                <ul class="dropdown-menu">
+                    <li>Services1</li>
+                    <li>Services2</li>
+                    <li>Services3</li>
+
+                </ul>
+            </li>
+            <li>Portfolio</li>
+            <li>Contact</li>
+        </ul>
+
+    </div>
+    <div class="menuborder">
+
+    </div>
+    <script>
+        $('.menuborder').mouseenter(function () {
+            $('.sidebar').toggleClass('active');
+            $('#bodyContent').addClass('bodyContent');
+        });
+        $('.sidebar').mouseleave(function () {
+            $('.sidebar').toggleClass('active');
+            $('#bodyContent').removeClass('bodyContent');
+        });
+
+
+    </script>
+    
+</body>
+</html >
